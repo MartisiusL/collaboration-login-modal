@@ -1,3 +1,1 @@
-import PopupClient from './popupClient';
-
-export { PopupClient };
+export * from './popupClient';
