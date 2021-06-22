@@ -88,5 +88,5 @@ class popupClient {
     }
   }
   
-  module.exports.popupClient = popupClient;
+exports.popupClient = popupClient;
   
