@@ -1,6 +1,6 @@
 {
   "name": "collaboration-login-modal",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Login modal used for communicating with Microsoft when redirect Url is provided by the Collaboration service.",
   "main": "src/index.js",
   "scripts": {
@@ -14,5 +14,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/MartisiusL/collaboration-login-modal.git"
+  },
+  "devDependencies": {
+    "@types/node": "^15.12.4"
   }
 }

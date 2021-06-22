@@ -91,3 +91,5 @@ export class popupClient {
     }
   }
 }
+
+module.exports.popupClient = popupClient;
