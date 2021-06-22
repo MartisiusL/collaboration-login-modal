@@ -2,8 +2,6 @@ import { BrowserAuthError } from '@azure/msal-browser';
 import { Constants, StringUtils } from '@azure/msal-common';
 
 export class PopupUtils {
-  private currentWindow: Window | undefined;
-
   constructor() {
     // Properly sets this reference for the unload event.
     this.unloadWindow = this.unloadWindow.bind(this);
@@ -22,10 +20,10 @@ export class PopupUtils {
    * @hidden
    */
   openPopup(
-    urlNavigate: string,
-    popupName: string,
-    popup?: Window | null
-  ): Window {
+    urlNavigate,
+    popupName,
+    popup
+  ) {
     try {
       let popupWindow;
       // Popup window passed in, setting url to navigate to
@@ -53,7 +51,7 @@ export class PopupUtils {
     }
   }
 
-  static openSizedPopup(urlNavigate: string, popupName: string): Window | null {
+  static openSizedPopup(urlNavigate, popupName) {
     const POPUP_WIDTH = 483;
     const POPUP_HEIGHT = 600;
     /**
@@ -86,7 +84,7 @@ export class PopupUtils {
   /**
    * Event callback to unload main window.
    */
-  unloadWindow(e: Event): void {
+  unloadWindow(e) {
     if (this.currentWindow) {
       this.currentWindow.close();
     }
@@ -98,7 +96,7 @@ export class PopupUtils {
    * Closes popup, removes any state vars created during popup calls.
    * @param popupWindow
    */
-  cleanPopup(popupWindow?: Window): void {
+  cleanPopup(popupWindow) {
     if (popupWindow) {
       // Close window.
       popupWindow.close();
@@ -111,7 +109,7 @@ export class PopupUtils {
    * Monitors a window until it loads a url with the same origin.
    * @param popupWindow - window that is being monitored
    */
-  monitorPopupForSameOrigin(popupWindow: Window): Promise<void> {
+  monitorPopupForSameOrigin(popupWindow) {
     const POLL_INTERVAL_MS = 50;
     return new Promise((resolve, reject) => {
       const intervalId = setInterval(() => {
@@ -122,7 +120,7 @@ export class PopupUtils {
           reject(BrowserAuthError.createUserCancelledError());
           return;
         }
-        let href: string = Constants.EMPTY_STRING;
+        let href = Constants.EMPTY_STRING;
         try {
           /*
            * Will throw if cross origin,

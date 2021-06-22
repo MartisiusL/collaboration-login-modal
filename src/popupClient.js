@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-
 import {
     InteractionType,
     EventType
@@ -8,7 +5,7 @@ import {
   import { PopupUtils } from './popupUtils';
   import { PopupHandler } from './popupHandler';
   
-class popupClient {
+export class popupClient {
     constructor() {
       this.isBrowserEnvironment = typeof window !== 'undefined';
       this.eventCallbacks = new Map();
@@ -87,6 +84,4 @@ class popupClient {
       }
     }
   }
-  
-exports.popupClient = popupClient;
   
