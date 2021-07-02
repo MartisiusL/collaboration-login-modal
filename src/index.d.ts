@@ -1,1 +1,1 @@
-export * from './popupClient';
+export * from './PopupClient';

@@ -1,12 +1,12 @@
-import { StringUtils } from '@azure/msal-common';
-import { BrowserAuthError, BrowserUtils } from '@azure/msal-browser';
-import { PopupUtils } from './popupUtils';
+"use strict";
+var MsalBroswer = require('@azure/msal-browser');
+var PopupUtils = require("./PopupUtils");
 
 /**
  * This class implements the interaction handler base class for browsers. It is written specifically for handling
  * popup window scenarios. It includes functions for monitoring the popup window for a hash.
  */
-export class PopupHandler {
+class PopupHandler {
   constructor() {
     this.popupUtils = new PopupUtils();
   }
@@ -17,7 +17,7 @@ export class PopupHandler {
    */
   initiateAuthRequest(requestUrl, params) {
     // Check that request url is not empty.
-    if (!StringUtils.isEmpty(requestUrl)) {
+    if (requestUrl) {
       // Open the popup window to requestUrl.
       return this.popupUtils.openPopup(
         requestUrl,
@@ -26,7 +26,7 @@ export class PopupHandler {
       );
     } else {
       // Throw error if request URL is empty.
-      throw BrowserAuthError.createEmptyNavigationUriError();
+      throw MsalBroswer.BrowserAuthError.createEmptyNavigationUriError();
     }
   }
 
@@ -37,9 +37,11 @@ export class PopupHandler {
    */
   monitorPopupForHash(popupWindow) {
     return this.popupUtils.monitorPopupForSameOrigin(popupWindow).then(() => {
-      BrowserUtils.clearHash(popupWindow);
+      MsalBroswer.BrowserUtils.clearHash(popupWindow);
       this.popupUtils.cleanPopup(popupWindow);
       return true;
     });
   }
 }
+
+module.exports = PopupHandler;

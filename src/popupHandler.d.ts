@@ -1,4 +1,4 @@
-import { PopupUtils } from './popupUtils';
+import { PopupUtils } from './PopupUtils';
 
 export type PopupParams = {
   popup?: Window | null;

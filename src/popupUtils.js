@@ -1,7 +1,8 @@
-import { BrowserAuthError } from '@azure/msal-browser';
-import { Constants, StringUtils } from '@azure/msal-common';
+"use strict";
+var MsalBrowser = require('@azure/msal-browser');
+var MsalCommon = require('@azure/msal-common');
 
-export class PopupUtils {
+class PopupUtils {
   constructor() {
     // Properly sets this reference for the unload event.
     this.unloadWindow = this.unloadWindow.bind(this);
@@ -37,7 +38,7 @@ export class PopupUtils {
 
       // Popup will be null if popups are blocked
       if (!popupWindow) {
-        throw BrowserAuthError.createEmptyWindowCreatedError();
+        throw MsalBrowser.BrowserAuthError.createEmptyWindowCreatedError();
       }
       if (popupWindow.focus) {
         popupWindow.focus();
@@ -47,7 +48,7 @@ export class PopupUtils {
 
       return popupWindow;
     } catch (e) {
-      throw BrowserAuthError.createPopupWindowError(e.toString());
+      throw MsalBrowser.BrowserAuthError.createPopupWindowError(e.toString());
     }
   }
 
@@ -117,10 +118,10 @@ export class PopupUtils {
           // Window is closed
           this.cleanPopup();
           clearInterval(intervalId);
-          reject(BrowserAuthError.createUserCancelledError());
+          reject(MsalBrowser.BrowserAuthError.createUserCancelledError());
           return;
         }
-        let href = Constants.EMPTY_STRING;
+        let href = MsalCommon.Constants.EMPTY_STRING;
         try {
           /*
            * Will throw if cross origin,
@@ -133,7 +134,7 @@ export class PopupUtils {
         }
 
         // Don't process blank pages or cross domain
-        if (StringUtils.isEmpty(href) || href === 'about:blank') {
+        if (!href || href === 'about:blank') {
           return;
         }
 
@@ -143,3 +144,5 @@ export class PopupUtils {
     });
   }
 }
+
+module.exports = PopupUtils;
