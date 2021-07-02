@@ -1,6 +1,6 @@
 {
   "name": "collaboration-login-modal",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Login modal used for communicating with Microsoft when redirect Url is provided by the Collaboration service.",
   "main": "src/index.js",
   "types": "src/index.d.ts",
